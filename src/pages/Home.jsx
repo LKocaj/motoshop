@@ -60,26 +60,35 @@ export default function Home() {
     <>
       {/* ───── HERO ───── */}
       <section className="relative overflow-hidden border-b border-zinc-800/50">
-        {/* Background glow */}
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-orange-500/[0.04] rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-orange-500/[0.02] rounded-full blur-[100px] pointer-events-none" />
+        {/* Desert road background */}
+        <div className="absolute inset-0">
+          <img
+            src="/desert-road.jpg"
+            alt=""
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Dark overlay — heavier on left for text readability */}
+          <div className="absolute inset-0 bg-linear-to-r from-zinc-950/95 via-zinc-950/80 to-zinc-950/50" />
+          {/* Bottom fade into the next section */}
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-zinc-950 to-transparent" />
+        </div>
 
         <div className="max-w-7xl mx-auto px-6 pt-20 pb-24 md:pt-28 md:pb-32 relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             {/* Left — Copy */}
             <div className="lg:col-span-6 pt-4">
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-full border border-orange-500/15 bg-orange-500/[0.06] mb-8">
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-full border border-orange-500/20 bg-zinc-950/60 backdrop-blur-sm mb-8">
                 <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
                 <span className="text-[11px] font-semibold text-orange-400 tracking-widest uppercase">
                   Early access — free to join
                 </span>
               </div>
 
-              <h1 className="text-[2.75rem] md:text-[3.5rem] lg:text-[4rem] font-black text-white tracking-[-0.035em] leading-[1.05] mb-6">
+              <h1 className="text-[2.75rem] md:text-[3.5rem] lg:text-[4rem] font-black text-white tracking-[-0.035em] leading-[1.05] mb-6 drop-shadow-lg">
                 The motorcycle industry deserves better software.
               </h1>
 
-              <p className="text-[17px] text-zinc-400 leading-[1.7] max-w-[48ch] mb-10">
+              <p className="text-[17px] text-zinc-300 leading-[1.7] max-w-[48ch] mb-10 drop-shadow-md">
                 Shop management. VIN history reports. Parts fitment. One platform,
                 built for motorcycle businesses — not car dealerships.
               </p>
@@ -87,14 +96,14 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
                   to="/pricing"
-                  className="group inline-flex items-center justify-center gap-2.5 text-[15px] font-bold text-zinc-950 bg-orange-500 px-7 py-3.5 rounded-xl hover:bg-orange-400 transition-all duration-200 active:translate-y-[1px] active:scale-[0.98]"
+                  className="group inline-flex items-center justify-center gap-2.5 text-[15px] font-bold text-zinc-950 bg-orange-500 px-7 py-3.5 rounded-xl hover:bg-orange-400 transition-all duration-200 active:translate-y-px active:scale-[0.98] shadow-lg shadow-orange-500/20"
                 >
                   Start free
                   <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                 </Link>
                 <a
                   href="#features"
-                  className="inline-flex items-center justify-center gap-2 text-[15px] font-semibold text-zinc-300 px-7 py-3.5 rounded-xl border border-zinc-700/80 hover:border-zinc-500 hover:text-white transition-all duration-200 active:translate-y-[1px]"
+                  className="inline-flex items-center justify-center gap-2 text-[15px] font-semibold text-white px-7 py-3.5 rounded-xl border border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-white/30 transition-all duration-200 active:translate-y-px"
                 >
                   See what we built
                 </a>
@@ -470,7 +479,7 @@ export default function Home() {
                   <p className="text-[13px] text-zinc-500 mt-1 mb-8 font-medium">Free forever</p>
                   <Link
                     to="/pricing"
-                    className="group inline-flex items-center justify-center gap-2 w-full text-[14px] font-bold text-zinc-950 bg-orange-500 px-5 py-3 rounded-xl hover:bg-orange-400 transition-all duration-200 active:translate-y-[1px]"
+                    className="group inline-flex items-center justify-center gap-2 w-full text-[14px] font-bold text-zinc-950 bg-orange-500 px-5 py-3 rounded-xl hover:bg-orange-400 transition-all duration-200 active:translate-y-px"
                   >
                     Create account
                     <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -496,14 +505,14 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               to="/pricing"
-              className="group inline-flex items-center justify-center gap-2.5 text-[15px] font-bold text-zinc-950 bg-orange-500 px-8 py-3.5 rounded-xl hover:bg-orange-400 transition-all duration-200 active:translate-y-[1px]"
+              className="group inline-flex items-center justify-center gap-2.5 text-[15px] font-bold text-zinc-950 bg-orange-500 px-8 py-3.5 rounded-xl hover:bg-orange-400 transition-all duration-200 active:translate-y-px"
             >
               Get started free
               <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </Link>
             <Link
               to="/pricing"
-              className="inline-flex items-center justify-center gap-2 text-[15px] font-semibold text-zinc-300 px-8 py-3.5 rounded-xl border border-zinc-700/80 hover:border-zinc-500 hover:text-white transition-all duration-200 active:translate-y-[1px]"
+              className="inline-flex items-center justify-center gap-2 text-[15px] font-semibold text-zinc-300 px-8 py-3.5 rounded-xl border border-zinc-700/80 hover:border-zinc-500 hover:text-white transition-all duration-200 active:translate-y-px"
             >
               View pricing
             </Link>
