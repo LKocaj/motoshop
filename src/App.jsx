@@ -6,7 +6,7 @@ import Pricing from './pages/Pricing'
 
 function App() {
   return (
-    <div className="min-h-dvh flex flex-col bg-slate-950 text-slate-300">
+    <div className="min-h-dvh flex flex-col bg-zinc-950 text-zinc-300">
       <Navbar />
       <main className="flex-1">
         <Routes>

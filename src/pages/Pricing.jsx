@@ -18,7 +18,7 @@ const tiers = [
     period: 'forever',
     cta: 'Create free account',
     icon: Users,
-    accent: 'slate',
+    accent: 'zinc',
     features: [
       'Bike lookup by VIN or year/make/model',
       'Community repair cost estimates',
@@ -118,29 +118,33 @@ const tiers = [
 ]
 
 const accentMap = {
-  slate: {
-    badge: 'border-slate-700 bg-slate-800/50 text-slate-400',
-    button: 'border border-slate-700 text-slate-300 hover:border-slate-500 hover:text-slate-100',
-    check: 'text-slate-600',
+  zinc: {
+    badge: 'border-zinc-700 bg-zinc-800/60 text-zinc-400',
+    button: 'border border-zinc-700 text-zinc-300 hover:border-zinc-500 hover:text-white',
+    check: 'text-zinc-600',
     ring: '',
+    sub: 'bg-zinc-800/40',
   },
   orange: {
-    badge: 'border-orange-500/20 bg-orange-500/5 text-orange-400',
-    button: 'bg-orange-500 text-slate-950 hover:bg-orange-400',
-    check: 'text-orange-400',
-    ring: 'ring-1 ring-orange-500/20',
+    badge: 'border-orange-500/15 bg-orange-500/[0.06] text-orange-400',
+    button: 'bg-orange-500 text-zinc-950 hover:bg-orange-400',
+    check: 'text-orange-400/70',
+    ring: 'ring-1 ring-orange-500/15',
+    sub: 'bg-orange-500/[0.04]',
   },
   emerald: {
-    badge: 'border-emerald-500/20 bg-emerald-500/5 text-emerald-400',
-    button: 'bg-emerald-500 text-slate-950 hover:bg-emerald-400',
-    check: 'text-emerald-400',
+    badge: 'border-emerald-500/15 bg-emerald-500/[0.06] text-emerald-400',
+    button: 'bg-emerald-500 text-zinc-950 hover:bg-emerald-400',
+    check: 'text-emerald-400/70',
     ring: '',
+    sub: 'bg-emerald-500/[0.04]',
   },
   blue: {
-    badge: 'border-blue-500/20 bg-blue-500/5 text-blue-400',
-    button: 'bg-blue-500 text-slate-950 hover:bg-blue-400',
-    check: 'text-blue-400',
+    badge: 'border-blue-500/15 bg-blue-500/[0.06] text-blue-400',
+    button: 'bg-blue-500 text-zinc-950 hover:bg-blue-400',
+    check: 'text-blue-400/70',
     ring: '',
+    sub: 'bg-blue-500/[0.04]',
   },
 }
 
@@ -151,24 +155,22 @@ export default function Pricing() {
     <>
       <section className="py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-2xl mb-16">
-            <h1 className="text-4xl md:text-6xl font-extrabold text-slate-100 tracking-tighter leading-none mb-4">
+          <div className="max-w-xl mb-16">
+            <h1 className="text-4xl md:text-[3.5rem] font-black text-white tracking-[-0.035em] leading-[1.05] mb-5">
               Simple pricing.
-              <br />
-              <span className="text-slate-500">Start free, upgrade when ready.</span>
             </h1>
-            <p className="text-base text-slate-500 leading-relaxed max-w-[55ch]">
-              Every rider gets free tools. Premium products are priced for independent shops,
-              not corporate dealership budgets.
+            <p className="text-[15px] text-zinc-500 leading-relaxed max-w-[48ch]">
+              Every rider gets free tools. Premium products are priced for independent
+              shops — not corporate dealership budgets.
             </p>
           </div>
 
-          <div className="flex items-center gap-3 mb-12">
-            <span className={`text-sm font-medium ${!annual ? 'text-slate-100' : 'text-slate-500'}`}>Monthly</span>
+          <div className="flex items-center gap-3 mb-14">
+            <span className={`text-[13px] font-semibold transition-colors ${!annual ? 'text-white' : 'text-zinc-600'}`}>Monthly</span>
             <button
               onClick={() => setAnnual(!annual)}
               className={`relative w-11 h-6 rounded-full transition-colors duration-200 ${
-                annual ? 'bg-orange-500' : 'bg-slate-700'
+                annual ? 'bg-orange-500' : 'bg-zinc-700'
               }`}
             >
               <div
@@ -177,64 +179,62 @@ export default function Pricing() {
                 }`}
               />
             </button>
-            <span className={`text-sm font-medium ${annual ? 'text-slate-100' : 'text-slate-500'}`}>
+            <span className={`text-[13px] font-semibold transition-colors ${annual ? 'text-white' : 'text-zinc-600'}`}>
               Annual
             </span>
             {annual && (
-              <span className="text-xs font-medium text-orange-400 bg-orange-400/10 px-2 py-0.5 rounded">
-                Save 20%
+              <span className="text-[10px] font-bold text-orange-400 bg-orange-400/10 px-2 py-0.5 rounded-full border border-orange-400/20 tracking-wide">
+                SAVE 20%
               </span>
             )}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {tiers.map((tier) => {
               const colors = accentMap[tier.accent]
               return (
                 <div
                   key={tier.name}
-                  className={`relative rounded-2xl border border-slate-800/60 bg-slate-900/30 p-8 ${colors.ring} ${
-                    tier.popular ? 'md:scale-[1.02]' : ''
-                  }`}
+                  className={`relative rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8 ${colors.ring} transition-colors duration-200 hover:bg-zinc-900/80`}
                 >
                   {tier.popular && (
                     <div className="absolute -top-3 left-8">
-                      <span className="text-xs font-semibold text-orange-400 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full">
-                        Most popular
+                      <span className="text-[10px] font-bold text-orange-400 bg-orange-500/10 border border-orange-500/15 px-3 py-1 rounded-full tracking-wide">
+                        MOST POPULAR
                       </span>
                     </div>
                   )}
 
                   <div className="flex items-center gap-3 mb-4">
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center border ${colors.badge}`}>
-                      <tier.icon className="w-4 h-4" />
+                      <tier.icon className="w-4 h-4" strokeWidth={2} />
                     </div>
-                    <h3 className="text-lg font-bold text-slate-100">{tier.name}</h3>
+                    <h3 className="text-[17px] font-black text-white">{tier.name}</h3>
                   </div>
 
-                  <p className="text-sm text-slate-500 mb-4">{tier.description}</p>
+                  <p className="text-[13px] text-zinc-500 mb-5 font-medium">{tier.description}</p>
 
                   <div className="flex items-baseline gap-1 mb-6">
-                    <span className="text-3xl font-bold text-slate-100">{tier.price}</span>
-                    <span className="text-sm text-slate-500">{tier.period}</span>
+                    <span className="text-3xl font-black text-white tracking-tight">{tier.price}</span>
+                    <span className="text-[13px] text-zinc-600 font-medium">{tier.period}</span>
                   </div>
 
                   {tier.tiers && (
-                    <div className="mb-6 space-y-2">
+                    <div className="mb-6 space-y-1.5">
                       {tier.tiers.map((sub) => (
-                        <div key={sub.name} className="flex items-center justify-between py-2 px-3 rounded-lg bg-slate-800/30">
+                        <div key={sub.name} className={`flex items-center justify-between py-2.5 px-3.5 rounded-lg ${colors.sub} border border-zinc-800/40`}>
                           <div>
-                            <span className="text-sm font-medium text-slate-300">{sub.name}</span>
-                            <span className="text-xs text-slate-500 ml-2">{sub.note}</span>
+                            <span className="text-[13px] font-semibold text-zinc-300">{sub.name}</span>
+                            <span className="text-[11px] text-zinc-600 ml-2 font-medium">{sub.note}</span>
                           </div>
-                          <span className="text-sm font-semibold text-slate-200">{sub.price}</span>
+                          <span className="text-[13px] font-bold text-zinc-200">{sub.price}</span>
                         </div>
                       ))}
                     </div>
                   )}
 
                   <button
-                    className={`w-full text-sm font-semibold px-5 py-2.5 rounded-lg transition-all duration-200 active:scale-[0.98] mb-8 ${colors.button}`}
+                    className={`w-full text-[13px] font-bold px-5 py-3 rounded-xl transition-all duration-150 active:translate-y-px mb-8 ${colors.button}`}
                   >
                     {tier.cta}
                   </button>
@@ -242,14 +242,14 @@ export default function Pricing() {
                   <div className="space-y-2.5">
                     {tier.features.map((f) => (
                       <div key={f} className="flex items-start gap-2.5">
-                        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${colors.check}`} />
-                        <span className="text-sm text-slate-400">{f}</span>
+                        <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 mt-0.5 ${colors.check}`} strokeWidth={2} />
+                        <span className="text-[13px] text-zinc-400 font-medium">{f}</span>
                       </div>
                     ))}
                     {tier.limits.map((f) => (
                       <div key={f} className="flex items-start gap-2.5">
-                        <Minus className="w-4 h-4 text-slate-700 shrink-0 mt-0.5" />
-                        <span className="text-sm text-slate-600">{f}</span>
+                        <Minus className="w-3.5 h-3.5 text-zinc-800 shrink-0 mt-0.5" />
+                        <span className="text-[13px] text-zinc-700 font-medium">{f}</span>
                       </div>
                     ))}
                   </div>
@@ -261,16 +261,16 @@ export default function Pricing() {
       </section>
 
       {/* ───── FAQ ───── */}
-      <section className="py-24 border-t border-slate-800/40">
+      <section className="py-24 border-t border-zinc-800/50">
         <div className="max-w-3xl mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-100 tracking-tight mb-12">
+          <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight mb-14">
             Common questions
           </h2>
-          <div className="divide-y divide-slate-800/40">
+          <div className="divide-y divide-zinc-800/40">
             {[
               {
                 q: 'Can I use the free tier forever?',
-                a: 'Yes. The free tier has no time limit and no credit card required. You get bike lookup, community repair estimates, market valuations, and your personal garage — all free.',
+                a: 'Yes. No time limit, no credit card. You get bike lookup, community repair estimates, market valuations, and your personal garage — all free.',
               },
               {
                 q: 'How is BikeCheck different from CycleVIN?',
@@ -278,20 +278,20 @@ export default function Pricing() {
               },
               {
                 q: 'I run a small shop with just me. Is MotoShop Pro worth it?',
-                a: 'The Solo plan at $49/month replaces your paper work orders, gives you online booking, and lets you text customers when their bike is ready. Most solo mechanics save 5-8 hours per week on admin alone.',
+                a: 'The Solo plan at $49/month replaces paper work orders, gives you online booking, and lets you text customers when their bike is ready. Most solo mechanics save 5-8 hours per week on admin.',
               },
               {
                 q: 'Does MotoFit cover older bikes?',
-                a: 'We are building the database starting with bikes from 2000 onward, with community-contributed fitment data going back further. If your bike is not covered yet, you can request it and our community fills in the gaps.',
+                a: 'We are building the database starting with 2000+ models, with community-contributed fitment data going further back. You can request coverage for any model.',
               },
               {
                 q: 'Can I cancel anytime?',
-                a: 'Yes. No contracts, no cancellation fees. You can downgrade to the free tier at any time and keep your data.',
+                a: 'Yes. No contracts, no cancellation fees. Downgrade to free at any time and keep your data.',
               },
             ].map((faq, i) => (
-              <div key={i} className="py-6">
-                <h3 className="text-sm font-semibold text-slate-200 mb-2">{faq.q}</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">{faq.a}</p>
+              <div key={i} className="py-7">
+                <h3 className="text-[14px] font-bold text-white mb-2.5">{faq.q}</h3>
+                <p className="text-[13px] text-zinc-500 leading-relaxed font-medium">{faq.a}</p>
               </div>
             ))}
           </div>
@@ -299,20 +299,21 @@ export default function Pricing() {
       </section>
 
       {/* ───── CTA ───── */}
-      <section className="py-24 border-t border-slate-800/40">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-100 tracking-tighter mb-4">
+      <section className="py-24 border-t border-zinc-800/50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-linear-to-t from-orange-500/3 to-transparent pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-6 text-center relative">
+          <h2 className="text-3xl md:text-[2.5rem] font-black text-white tracking-[-0.03em] mb-4">
             Ready to modernize your shop?
           </h2>
-          <p className="text-sm text-slate-500 max-w-[45ch] mx-auto mb-8">
+          <p className="text-[14px] text-zinc-500 max-w-[40ch] mx-auto mb-8 font-medium">
             Join the early access. Free account takes 30 seconds.
           </p>
           <Link
             to="/"
-            className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-slate-950 bg-orange-500 px-8 py-3 rounded-lg hover:bg-orange-400 transition-all duration-200 active:scale-[0.98]"
+            className="group inline-flex items-center justify-center gap-2.5 text-[15px] font-bold text-zinc-950 bg-orange-500 px-8 py-3.5 rounded-xl hover:bg-orange-400 transition-all duration-200 active:translate-y-px"
           >
             Get started free
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
           </Link>
         </div>
       </section>
