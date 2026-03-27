@@ -233,11 +233,12 @@ export default function Pricing() {
                     </div>
                   )}
 
-                  <button
-                    className={`w-full text-[13px] font-bold px-5 py-3 rounded-xl transition-all duration-150 active:translate-y-px mb-8 ${colors.button}`}
+                  <Link
+                    to={tier.name === 'Free' ? '/' : `/#${tier.name === 'MotoShop Pro' ? 'shop-pro' : tier.name === 'BikeCheck' ? 'bikecheck' : 'motofit'}`}
+                    className={`block text-center w-full text-[13px] font-bold px-5 py-3 rounded-xl transition-all duration-150 active:translate-y-px mb-8 ${colors.button}`}
                   >
                     {tier.cta}
-                  </button>
+                  </Link>
 
                   <div className="space-y-2.5">
                     {tier.features.map((f) => (

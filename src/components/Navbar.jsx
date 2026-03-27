@@ -1,18 +1,51 @@
-import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useState, useCallback } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X, Wrench } from 'lucide-react'
 
 const navLinks = [
-  { label: 'Features', href: '/#features' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'MotoShop Pro', href: '/#shop-pro' },
-  { label: 'BikeCheck', href: '/#bikecheck' },
-  { label: 'MotoFit', href: '/#motofit' },
+  { label: 'Features', to: '/', hash: '#features' },
+  { label: 'Pricing', to: '/pricing', hash: '' },
+  { label: 'MotoShop Pro', to: '/', hash: '#shop-pro' },
+  { label: 'BikeCheck', to: '/', hash: '#bikecheck' },
+  { label: 'MotoFit', to: '/', hash: '#motofit' },
 ]
+
+function NavLink({ link, onClick, className }) {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const handleClick = useCallback(
+    (e) => {
+      e.preventDefault()
+      if (onClick) onClick()
+
+      if (link.hash && location.pathname === link.to) {
+        const el = document.querySelector(link.hash)
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+      } else {
+        navigate(link.to + link.hash)
+      }
+    },
+    [link, location.pathname, navigate, onClick]
+  )
+
+  const isActive = link.hash
+    ? location.pathname === link.to && location.hash === link.hash
+    : location.pathname === link.to
+
+  return (
+    <a
+      href={link.to + link.hash}
+      onClick={handleClick}
+      className={className(isActive)}
+    >
+      {link.label}
+    </a>
+  )
+}
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const location = useLocation()
 
   return (
     <nav className="sticky top-0 z-40 border-b border-zinc-800/50 bg-zinc-950/85 backdrop-blur-xl backdrop-saturate-150">
@@ -28,17 +61,15 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-7">
           {navLinks.map((link) => (
-            <Link
+            <NavLink
               key={link.label}
-              to={link.href}
-              className={`text-[13px] font-semibold transition-colors duration-150 hover:text-white ${
-                location.pathname === link.href
-                  ? 'text-orange-400'
-                  : 'text-zinc-500'
-              }`}
-            >
-              {link.label}
-            </Link>
+              link={link}
+              className={(active) =>
+                `text-[13px] font-semibold transition-colors duration-150 hover:text-white ${
+                  active ? 'text-orange-400' : 'text-zinc-500'
+                }`
+              }
+            />
           ))}
         </div>
 
@@ -69,14 +100,14 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden border-t border-zinc-800/50 bg-zinc-950/95 backdrop-blur-xl px-6 py-5 space-y-1">
           {navLinks.map((link) => (
-            <Link
+            <NavLink
               key={link.label}
-              to={link.href}
+              link={link}
               onClick={() => setOpen(false)}
-              className="block text-[14px] font-semibold text-zinc-400 hover:text-white py-2.5 transition-colors"
-            >
-              {link.label}
-            </Link>
+              className={() =>
+                'block text-[14px] font-semibold text-zinc-400 hover:text-white py-2.5 transition-colors'
+              }
+            />
           ))}
           <div className="pt-4 mt-2 border-t border-zinc-800/50 space-y-2.5">
             <Link
